@@ -27,6 +27,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() })
     }
+
     //destructing the request body
     const { name, email, password } = req.body
 
