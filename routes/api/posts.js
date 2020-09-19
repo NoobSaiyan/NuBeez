@@ -56,11 +56,34 @@ router.get('/', auth, async (req, res) => {
 //@access  Private
 router.get('/:id', auth, async (req, res) => {
   try {
-    const posts = await Post.find()
+    const posts = await Post.findById(req.params.id)
 
     if (!posts) return res.status(404).json({ msg: 'Post not found' })
 
     res.json(posts)
+  } catch (err) {
+    console.error(err.message)
+    if (err.kind === 'ObjectId')
+      return res.status(404).json({ msg: 'Post not found' })
+    res.status(500).send('Server Error')
+  }
+})
+
+//@route   DELETE api/posts/:id
+//@desc    Delete post by id
+//@access  Private
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id)
+
+    if (!post) return res.status(404).json({ msg: 'Post not found' })
+
+    //check user
+    if (post.user.toString() !== req.user.id)
+      return res.status(401).json({ msg: 'User not authorized' })
+
+    await post.remove()
+    res.json({ msg: 'Post removed' })
   } catch (err) {
     console.error(err.message)
     if (err.kind === 'ObjectId')
