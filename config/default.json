@@ -1,6 +1,0 @@
-{
-  "mongoURL": "mongodb+srv://NoobSaiyan:noobsaiyan@nubeez.iyo77.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "terimummy",
-  "githubClientId": "bce0ee74073415e77627",
-  "githubSecret": "1494e07ae24189cb844655dc06a318437a31151e"
-}
