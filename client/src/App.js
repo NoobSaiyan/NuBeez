@@ -6,6 +6,8 @@ import Login from './components/auth/Login'
 import Regiseter from './components/auth/Register'
 import Alert from './components/layout/Alert'
 import setAuthToken from './utils/setAuthToken'
+import Dashboard from './components/dashboard/Dashboard'
+import PrivateRoute from './components/routing/PrivateRoute'
 import './App.css'
 //redux
 import { Provider } from 'react-redux'
@@ -32,6 +34,7 @@ const App = () => {
             <Switch>
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Regiseter} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
             </Switch>
           </section>
         </Fragment>
