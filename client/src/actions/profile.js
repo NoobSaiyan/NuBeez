@@ -19,3 +19,40 @@ export const getCurrentProfile = () => async (dispatch) => {
     })
   }
 }
+
+//create and update profile
+
+export const createProfile = (formData, history, edit = false) => async (
+  dispatch
+) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    const res = await axios.post('/api/profile', formData, config)
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    })
+
+    dispatch(setAlert(edit ? 'Profile Update' : 'Profile Created'))
+
+    if (!edit) {
+      history.push('/dasboard')
+    }
+  } catch (err) {
+    console.log(err.response)
+    const error = err.response.data.error
+
+    if (error) {
+      error.forEach((error) => dispatch(setAlert(error.msg, 'danger')))
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    })
+  }
+}
