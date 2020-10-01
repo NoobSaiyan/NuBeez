@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { setAlert } from './alert'
-
 import { GET_PROFILE, PROFILE_ERROR } from './types'
 
 //get current users profile
@@ -38,7 +37,7 @@ export const createProfile = (formData, history, edit = false) => async (
       payload: res.data,
     })
 
-    dispatch(setAlert(edit ? 'Profile Update' : 'Profile Created'))
+    dispatch(setAlert(edit ? 'Profile Update' : 'Profile Created', 'success'))
 
     if (!edit) {
       history.push('/dasboard')
