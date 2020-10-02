@@ -10,23 +10,23 @@ import {
 
 //get current users profile
 export const getCurrentProfile = () => async (dispatch) => {
+  console.log('called')
   try {
     const res = await axios.get('/api/profile/me')
-
     dispatch({
       type: GET_PROFILE,
       payload: res.data,
     })
   } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    })
+    console.log(err.response)
+    // dispatch({
+    //   type: PROFILE_ERROR,
+    //   payload: { msg: err.response.statusText, status: err.response.status },
+    // })
   }
 }
 
 //create and update profile
-
 export const createProfile = (formData, history, edit = false) => async (
   dispatch
 ) => {

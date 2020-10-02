@@ -6,20 +6,17 @@ import DashboardAction from './DashboardActions'
 import Experience from './Experience'
 import Education from './Education'
 import { deleteAccount, getCurrentProfile } from '../../actions/profile'
-import Spinner from '../layout/Spinner'
 
 const Dashboard = ({
   getCurrentProfile,
   deleteAccount,
   auth: { user },
-  profile: { profile, loading },
+  profile: { profile },
 }) => {
   useEffect(() => {
     getCurrentProfile()
-  }, [])
-  return loading && profile === null ? (
-    <Spinner />
-  ) : (
+  }, [getCurrentProfile])
+  return (
     <Fragment>
       <h1 className='large text-primary'>Dashboard</h1>
       <p className='lead'>
